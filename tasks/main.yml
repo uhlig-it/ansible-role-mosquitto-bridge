@@ -4,24 +4,43 @@
     name: mosquitto
     state: present
   become: true
+  tags:
+    - apt
+    - mosquitto
+    - bridge
 
 - name: Service exists
   service:
     name: mosquitto
     enabled: true
   become: true
+  tags:
+    - systemd
+    - service
+    - mosquitto
+    - bridge
 
 - name: Client package is present
   apt:
     name: mosquitto-clients
     state: present
   become: true
+  tags:
+    - apt
+    - mosquitto
+    - client
+    - bridge
 
 - name: Password file exists
   file:
     path: /etc/mosquitto/passwd
     state: touch
   become: true
+  tags:
+    - password
+    - file
+    - mosquitto
+    - bridge
 
 - name: Password file is up to date
   command: "mosquitto_passwd -b /etc/mosquitto/passwd {{ item.name | quote }} {{ item.password | quote }}"
@@ -29,6 +48,11 @@
   notify:
     - restart mosquitto
   loop: "{{ mosquitto_users }}"
+  tags:
+    - password
+    - file
+    - mosquitto
+    - bridge
 
 - name: Config is up to date
   template:
@@ -37,3 +61,7 @@
   become: true
   notify:
     - restart mosquitto
+  tags:
+    - conf
+    - mosquitto
+    - bridge

@@ -15,6 +15,7 @@ mqtt_bridges:
   password: supersigrid
   topics:
   - "# both 0"
+  ca_path: /etc/ssl/certs
 ```
 
 This configuration will create a local broker with a bridge to `mqtt.example.com:8883`. Each and every message to and from `mqtt.example.com:8883` will be replicated locally.
@@ -22,6 +23,7 @@ This configuration will create a local broker with a bridge to `mqtt.example.com
 * The `user` and `password` must be valid at `mqtt.example.com:8883`
 * `name` is the client ID used at `mqtt.example.com:8883`
 * `topics` is a list of topic patterns as specified in [`mosquitto.conf`](https://mosquitto.org/man/mosquitto-conf-5.html).
+* `ca_path` is a directory where this bridge can find the CAs it should trust. `/etc/ssl/certs` is a good default.
 
 Users that are local to the broker can be added like this:
 

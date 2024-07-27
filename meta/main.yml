@@ -4,11 +4,9 @@ galaxy_info:
   description: Simple local Mosquitto server that bridges to a proper one
   license: MIT
   min_ansible_version: 2.6
-
   platforms:
     - name: Debian
       versions:
         - stretch
-
   galaxy_tags:
     - mosquitto

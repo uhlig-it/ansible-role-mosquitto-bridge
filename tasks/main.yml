@@ -1,4 +1,3 @@
----
 - name: Server package is present
   apt:
     name: mosquitto
@@ -8,7 +7,6 @@
     - apt
     - mosquitto
     - bridge
-
 - name: Service exists
   service:
     name: mosquitto
@@ -19,7 +17,6 @@
     - service
     - mosquitto
     - bridge
-
 - name: Client package is present
   apt:
     name: mosquitto-clients
@@ -30,7 +27,6 @@
     - mosquitto
     - client
     - bridge
-
 - name: Password file exists
   file:
     path: /etc/mosquitto/passwd
@@ -41,7 +37,6 @@
     - file
     - mosquitto
     - bridge
-
 - name: Password file is up to date
   command: "mosquitto_passwd -b /etc/mosquitto/passwd {{ item.name | quote }} {{ item.password | quote }}"
   become: true
@@ -53,7 +48,6 @@
     - file
     - mosquitto
     - bridge
-
 - name: Config is up to date
   template:
     src: templates/mosquitto.conf
